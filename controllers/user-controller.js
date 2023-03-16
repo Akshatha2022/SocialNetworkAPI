@@ -74,7 +74,7 @@ const usersController = {
 
     // Delete a current user by ID
     addFriend({params}, res) {
-        Users.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true, runValidators: true})
+        Users.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true})
         .populate({path: 'friends', select: ('-__v')})
         .select('-__v')
         .then(dbUsersData => {

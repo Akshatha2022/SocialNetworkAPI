@@ -39,7 +39,7 @@ const thoughtsController = {
     createThoughts({params, body}, res) {
         Thoughts.create(body)
         .then(({_id}) => {
-            return Users.findOneAndUpdate({ _id: params.userId}, {$push: {thoughts: _id}}, {new: true, runValidators: true});
+            return Users.findOneAndUpdate({ _id: params.userId}, {$push: {thoughts: _id}}, {new: true});
         })
         .then(dbThoughtsData => {
             if(!dbThoughtsData) {
