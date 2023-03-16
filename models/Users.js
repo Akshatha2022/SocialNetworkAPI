@@ -14,4 +14,20 @@ const UserSchema = new Schema({
         // use REGEX to validate email
         match: [/.+@.+\..+/]
     },
-)}
+    thoughts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Thought'
+    }],
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }]
+},
+{
+    toJSON: {
+        virtuals: true
+    },
+    id: false
+})
+
+module.exports = User;
