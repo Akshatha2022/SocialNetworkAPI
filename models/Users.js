@@ -1,3 +1,4 @@
+// Requires Mongoose for this
 const { Schema, model } = require('mongoose');
 
 const UsersSchema = new Schema(
@@ -42,4 +43,5 @@ UsersSchema.virtual('friendCount').get(function() {
 // create the Users model using the Users Schema
 const Users = model('Users', UsersSchema);
 
+// Exporting Users modules
 module.exports = Users;
