@@ -1,3 +1,4 @@
+// This requires express and mongoose
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -11,13 +12,14 @@ app.use(express.static('public'));
 
 app.use(require('./routes'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network-api', {
-  useFindAndModify: false,
+// Connect to mongoose
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-network-api', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-// Use this to log mongo queries being executed!
+
+// Log mongoose queries here
 mongoose.set('debug', true);
 
 app.listen(PORT, () => console.log(` *******Finally Connected on localhost:${PORT} ******* `));
