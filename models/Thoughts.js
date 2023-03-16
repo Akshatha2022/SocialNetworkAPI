@@ -46,6 +46,8 @@ const ThoughtsSchema = new Schema(
         type: String,
         required: true
     },
+    
+     // using ReactionsSchema to validate data for a reply
     reactions: [ReactionsSchema]
 },
 {
@@ -58,10 +60,12 @@ id: false
     }
 )
 
-ThoughtSchema.virtual('reactionCount').get(function() {
+// get total count of reactions
+ThoughtsSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 });
 
-const Thought = model('Thought', ThoughtSchema);
+// creating the Thoughts model using the Thoughts Schema
+const Thoughts = model('Thoughts', ThoughtsSchema);
 
-module.exports = ThoughtsSchema;
+module.exports = Thoughts;
