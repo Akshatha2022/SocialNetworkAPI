@@ -1,15 +1,17 @@
-const { Thought, User } = require('../models');
+const { Thoughts, Users } = require('../models');
 
-const thoughtController = {
-    getAllThoughts(req,res) {},
-    getThoughtById({ params }, res) {},
-    createThought({ params, body}, res) {},
-    updateThought({ params, body }, res) {},
-    deleteThought({ params }, res) {},
-    addReaction({ params, body}, res) {},
-    deleteReaction({ params }, res) {}
+const thoughtsController = {
 
-
-};
-
-module.exports = thoughtController;
+    // Get all available Thoughts
+    getAllThoughts(req,res) {
+        Thoughts.find({})
+        .populate({path: 'reactions',select: '-__v'})
+        .select('-__v')
+        // .sort({_id: -1})
+        .then(dbThoughtsData => res.json(dbThoughtsData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
+}
