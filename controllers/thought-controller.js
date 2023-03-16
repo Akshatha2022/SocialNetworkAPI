@@ -50,7 +50,7 @@ const thoughtsController = {
         })
         .catch(err => res.json(err)); 
         
-    }
+    },
 
      // Updating a current thought by ID
      updateThoughts({ params, body }, res) {
@@ -65,6 +65,20 @@ const thoughtsController = {
                 res.json(dbThoughtsData);
         })
         .catch(err => res.status(400).json(err));
-    }
+    },
+
+  // Deleting a current thought by its ID
+  deleteThoughts({ params }, res) 
+  {
+    Thoughts.findOneAndDelete({ _id: params.id })
+    .then(dbThoughtsData => {
+        if (!dbThoughtsData) {
+            res.status(404).json({ message: 'No thoughts with this particular ID!' });
+            return;
+        }
+        res.json(dbThoughtsData);
+        })
+        .catch(err => res.status(400).json(err));
+},
 
 
